@@ -30,11 +30,11 @@ export class UserController {
   @Put('/update/:email')
   updateUser(@Param('email') email: string, @Body() user: User) {
     console.log(user);
-    return this.UserService.updateUser(email, user);
+    return this.userService.updateUser(email, user);
   }
 
   @Delete('/delete/:email')
   deleteUser(@Param('email') email: string) {
-    return this.UserService.deleteUser(email);
+    return this.userService.deleteUser(email);
   }
 }
