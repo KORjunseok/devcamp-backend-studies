@@ -4,8 +4,8 @@ POST {{server}}/create
 Content-Type: application/json
 
 {
-    "username": "elly2",
-    "password": "1234",
+    "username": "elly3",
+    "password": "ekfdk@gr23",
     "email": "elly3@abc.com"
 }
 
@@ -17,10 +17,19 @@ PUT {{server}}/update/elly3@abc.com
 Content-Type: application/json
 
 {
-    "email": "elly244@abc.com",
-    "username": "ellffflly",
-    "password": "1234"
+    "username": "333ellffflly",
+    "password": "gff@ffff11s"
 }
 
 ### delete
 DELETE {{server}}/delete/elly3@abc.com
+
+### Create (잘못된 이메일을 넣은 경우)
+POST {{server}}/create
+Content-Type: application/json
+
+{
+    "username": "sd",
+    "password": "ekfdk@gr23",
+    "email": "OJS3abccom"
+}

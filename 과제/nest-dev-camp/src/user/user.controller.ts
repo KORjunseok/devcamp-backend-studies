@@ -7,15 +7,16 @@ import {
   Put,
   Delete,
 } from '@nestjs/common';
-import { User } from './user.entity';
 import { UserService } from './user.service';
+
+import { CreateUserDto, UpdateUserDto } from './user.dto'; // dto 임포트 유효성 검증
 
 @Controller('user')
 export class UserController {
   constructor(private userService: UserService) {} // 유저 서비스 주입
 
   @Post('/create')
-  createUser(@Body() user: User) {
+  createUser(@Body() user: CreateUserDto) {
     // 유저 생성
     return this.userService.createUser(user);
   }
@@ -28,7 +29,7 @@ export class UserController {
   }
 
   @Put('/update/:email')
-  updateUser(@Param('email') email: string, @Body() user: User) {
+  updateUser(@Param('email') email: string, @Body() user: UpdateUserDto) {
     console.log(user);
     return this.userService.updateUser(email, user);
   }
