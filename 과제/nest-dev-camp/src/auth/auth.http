@@ -8,3 +8,12 @@ Content-Type: application/json
     "password": "gkfkgfo@123",
     "username": "bbb"
 }
+
+### 로그인 
+POST {{server}}/login
+Content-Type: application/json
+
+{
+    "email": "aaa33@abc.com",
+    "password": "gkfkgfo@123"
+}
