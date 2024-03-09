@@ -17,3 +17,15 @@ Content-Type: application/json
     "email": "aaa33@abc.com",
     "password": "gkfkgfo@123"
 }
+
+### 로그인2 : LoginGuard
+POST {{server}}/login2
+Content-Type: application/json
+
+{
+    "email": "aaa33@abc.com",
+    "password": "gkfkgfo@123"
+}
+
+### Guard 테스트
+GET {{server}}/test-guard
