@@ -1,13 +1,15 @@
-import { CanActivate, Injectable } from "@nestjs/common";
-import { AuthService } from "./auth.service";
+import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
+import { AuthService } from './auth.service';
+import { AuthGuard } from '@nestjs/passport';
 
 @Injectable() // 프로바이더
-export class LoginGuard implements CanActivate { // CanActivate 인터페이스 구현
-  constructor(private authService :AuthService) {} // authService 주입
+export class LoginGuard implements CanActivate {
+  // CanActivate 인터페이스 구현
+  constructor(private authService: AuthService) {} // authService 주입
 
   async canActivate(context: any): Promise<boolean> {
     // 리퀘스트 정보 가져옴
-    const request = context.switchToHttp().getRequest(); 
+    const request = context.switchToHttp().getRequest();
 
     // 쿠키가 있으면 인증
     if (request.cookies['login']) {
@@ -22,7 +24,7 @@ export class LoginGuard implements CanActivate { // CanActivate 인터페이스 
       request.body.email,
       request.body.password,
     );
-    
+
     // 유저 정보가 없으면 false 반환
     if (!user) {
       return false;
@@ -30,5 +32,24 @@ export class LoginGuard implements CanActivate { // CanActivate 인터페이스 
     // 있으면 request에 user 정보 추가 true 반환
     request.user = user;
     return true;
+  }
+}
+
+@Injectable()
+export class LocalAuthGuard extends AuthGuard('local') {
+  async CanActivate(context: any): Promise<boolean> {
+    const result = (await super.canActivate(context)) as boolean;
+    // 로컬 스트래티지 실행
+    const request = context.switchToHttp().getRequest();
+    await super.logIn(request); // 세션 저장
+    return result;
+  }
+}
+
+@Injectable()
+export class AuthenticatedGuard implements CanActivate {
+  canActivate(context: ExecutionContext): boolean {
+    const request = context.switchToHttp().getRequest();
+    return request.isAuthenticated(); // 세션에서 정보를 읽어 인증 확인
   }
 }

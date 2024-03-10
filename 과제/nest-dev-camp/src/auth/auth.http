@@ -4,7 +4,7 @@ POST {{server}}/register
 Content-Type: application/json
 
 {
-    "email": "aaa33@abc.com",
+    "email": "bbb@abc.com",
     "password": "gkfkgfo@123",
     "username": "bbb"
 }
@@ -29,3 +29,25 @@ Content-Type: application/json
 
 ### Guard 테스트
 GET {{server}}/test-guard
+
+
+### 로그인 3 
+POST {{server}}/login3
+Content-Type: application/json
+
+{
+    "email": "bbb@abc.com",
+    "password": "gkfkgfo@123"
+}
+
+### 로그인 3 : 틀린 패스워드 
+POST {{server}}/login3
+Content-Type: application/json
+
+{
+    "email": "bbb@abc.com",
+    "password": "bb"
+}
+
+### 인증이 성공했는지 테스트 
+GET {{server}}/test-guard2

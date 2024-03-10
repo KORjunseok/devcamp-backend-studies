@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Post, Request, Response, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from 'src/user/user.dto';
-import { LoginGuard } from './auth.guard';
+import { AuthenticatedGuard,LoginGuard, LocalAuthGuard } from './auth.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -52,4 +52,15 @@ export class AuthController {
     return '로그인한 상태에서만 보이는 메시지'
   }
 
+  @UseGuards(LocalAuthGuard)
+  @Post('login3')
+  login3(@Request() req) {
+    return req.user;
+  }
+
+  @UseGuards(AuthenticatedGuard)
+  @Get('test-guard2')
+  testGuardWithSession(@Request() req) {
+    return req.user;
+  }
 }
