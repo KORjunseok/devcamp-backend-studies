@@ -8,7 +8,7 @@ export class User {
   @Column({ unique: true })
   email: string;
 
-  @Column()
+  @Column({nullable: true}) // 패스워드에 빈 값 허용
   password: string;
 
   @Column()
@@ -16,4 +16,7 @@ export class User {
 
   @Column({ default: true }) // 기본 값
   createdDt: Date = new Date();
+
+  @Column({nullable: true}) // providerId에 빈 값 허용
+  providerId: string; // providerId 추가 
 }
