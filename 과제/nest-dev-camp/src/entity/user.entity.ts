@@ -15,7 +15,7 @@ export class User {
   username: string;
 
   @Column({ default: true }) // 기본 값
-  createdDt: Date = new Date();
+  createdAt: Date = new Date();
 
   @Column({nullable: true}) // providerId에 빈 값 허용
   providerId: string; // providerId 추가 
